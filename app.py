@@ -182,12 +182,12 @@ def create_poster(day_of_week, month, day_num_str, pub_name):
         return None
 
 # --- Streamlit UI Code ---
-st.set_page_config(layout="centered", page_title="Pub Soc Poster Gen")
+st.set_page_config(layout="centered", page_title="Pub Society Poster")
 st.title("🍻 Pub Soc Poster Generator 🦆")
 
 # --- User Inputs ---
 date_str_input = st.text_input(
-    "Enter Event Date",
+    "Enter Event Date!!",
     placeholder="e.g., March 18 or Tuesday 18 March",
     help="Enter the date like 'Month Day' or 'Weekday Day Month'"
 )
@@ -237,12 +237,12 @@ if st.button("✨ Generate Poster ✨"):
 
         # --- Call Image Generation if Date is Valid ---
         if day_of_week and month and day_num_str:
-            with st.spinner("⏳ Generating image..."): # Show a loading indicator
+            with st.spinner("⏳ Generating image... keep yer pants on"): # Show a loading indicator
                 generated_image = create_poster(day_of_week, month, day_num_str, pub_name_input)
 
             # --- Display Result ---
             if generated_image:
-                st.success("✅ Poster Generated!")
+                st.success("✅ Poster Generated! now post to the IG x")
                 st.image(generated_image, caption="Generated Poster", use_column_width=True)
 
                 # --- Add Download Button ---
@@ -268,4 +268,4 @@ if st.button("✨ Generate Poster ✨"):
 
 # --- Footer ---
 st.markdown("---")
-st.caption("Enter the event details above and click generate. Adjust X/Y/W/H values in the script if needed.")
+st.caption("Enter the event details above and click generate. big up dan (me)")
