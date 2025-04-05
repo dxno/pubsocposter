@@ -188,7 +188,7 @@ st.title("🍻 Pub Soc Poster Generator 🦆")
 # --- User Inputs ---
 date_str_input = st.text_input(
     "Enter Event Date!!",
-    placeholder="e.g., March 18 or Tuesday 18 March",
+    placeholder="e.g., 18 March or Tuesday 18 March",
     help="Enter the date like 'Month Day' or 'Weekday Day Month'"
 )
 pub_name_input = st.text_input("Enter Pub Name")
@@ -229,7 +229,7 @@ if st.button("✨ Generate Poster ✨"):
                 day_num_str = str(event_date.day)
                 st.info(f"🗓️ Using date: {day_of_week}, {month} {day_num_str} ({event_date.year})")
             else:
-                st.error("❌ Could not automatically parse date. Please use format like 'March 18' or 'Tuesday 18 March'.")
+                st.error("❌ Could not automatically parse date. Please use format like '4 July' or 'Tuesday 18 March'.")
 
         except Exception as e:
             st.error(f"🤯 Error during date parsing: {e}")
@@ -243,7 +243,7 @@ if st.button("✨ Generate Poster ✨"):
             # --- Display Result ---
             if generated_image:
                 st.success("✅ Poster Generated! now post to the IG x")
-                st.image(generated_image, caption="Generated Poster", use_column_width=True)
+                st.image(generated_image, caption="Generated Poster", use_container_width=True)
 
                 # --- Add Download Button ---
                 try:
