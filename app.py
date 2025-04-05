@@ -57,14 +57,14 @@ EVENT_TYPE_BOX = (EVENT_TYPE_X, EVENT_TYPE_Y, EVENT_TYPE_X + EVENT_TYPE_W, EVENT
 # 7. TIME Box - Fits text, will be left-aligned
 TIME_X = 155
 TIME_Y = 2435
-TIME_W = 530 # Adjust width to constrain font size if needed
+TIME_W = 600 # Adjust width to constrain font size if needed
 TIME_H = 300
 TIME_BOX = (TIME_X, TIME_Y, TIME_X + TIME_W, TIME_Y + TIME_H)
 
 # 8. FIRST PLACE Box - Fits text, will be centered
-FIRST_PLACE_X = 725
+FIRST_PLACE_X = 800
 FIRST_PLACE_Y = 2435 # Same line as Time
-FIRST_PLACE_W = 1650 # Adjust width
+FIRST_PLACE_W = 1550 # Adjust width
 FIRST_PLACE_H = 300
 FIRST_PLACE_BOX = (FIRST_PLACE_X, FIRST_PLACE_Y, FIRST_PLACE_X + FIRST_PLACE_W, FIRST_PLACE_Y + FIRST_PLACE_H)
 
