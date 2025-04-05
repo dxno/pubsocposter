@@ -246,7 +246,7 @@ if st.button("✨ Generate Poster ✨"):
             if parsed:
                 day_of_week = event_date.strftime("%A"); month = event_date.strftime("%B"); day_num_str = str(event_date.day)
                 st.info(f"🗓️ Using date: {day_of_week}, {month} {day_num_str} ({event_date.year})")
-            else: st.error("❌ Could not parse date. Use format like '4 July' or 'Tuesday 18 March'.")
+            else: st.error("❌ Could not parse date. Use format like 'July 4' or 'Tuesday 18 March'.")
         except Exception as e: st.error(f"🤯 Error during date parsing: {e}"); event_date = None
 
         # Get Optional Values
