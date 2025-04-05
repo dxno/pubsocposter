@@ -46,23 +46,23 @@ DEFAULT_FIRST_PLACE = "@ COURTYARD"
 
 # 6. EVENT TYPE Box - Fits text, will be left-aligned
 EVENT_TYPE_X = 200
-EVENT_TYPE_Y = 2275
+EVENT_TYPE_Y = 2295
 EVENT_TYPE_W = 2020 # Wide to allow centering if needed later, but text aligns left
-EVENT_TYPE_H = 180
+EVENT_TYPE_H = 165
 EVENT_TYPE_BOX = (EVENT_TYPE_X, EVENT_TYPE_Y, EVENT_TYPE_X + EVENT_TYPE_W, EVENT_TYPE_Y + EVENT_TYPE_H)
 
 # 7. TIME Box - Fits text, will be left-aligned
 TIME_X = 155
 TIME_Y = 2435
 TIME_W = 515 # Adjust width to constrain font size if needed
-TIME_H = 330
+TIME_H = 315
 TIME_BOX = (TIME_X, TIME_Y, TIME_X + TIME_W, TIME_Y + TIME_H)
 
 # 8. FIRST PLACE Box - Fits text, will be centered
-FIRST_PLACE_X = 695
+FIRST_PLACE_X = 705
 FIRST_PLACE_Y = 2435 # Same line as Time
-FIRST_PLACE_W = 1700 # Adjust width
-FIRST_PLACE_H = 330
+FIRST_PLACE_W = 1650 # Adjust width
+FIRST_PLACE_H = 315
 FIRST_PLACE_BOX = (FIRST_PLACE_X, FIRST_PLACE_Y, FIRST_PLACE_X + FIRST_PLACE_W, FIRST_PLACE_Y + FIRST_PLACE_H)
 
 
