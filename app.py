@@ -9,9 +9,12 @@ from io import BytesIO # Needed for download button
 # --- Configuration ---
 TEMPLATE_IMAGE = "template.png"
 FONT_NAME = "Grandstander-Black.ttf"
+FONT_NAME2 = "Grandstander-Bold.ttf"
 SCRIPT_DIR = os.path.dirname(__file__)
 TEMPLATE_PATH = os.path.join(SCRIPT_DIR, TEMPLATE_IMAGE)
 FONT_PATH = os.path.join(SCRIPT_DIR, FONT_NAME)
+FONT_PATH2 = os.path.join(SCRIPT_DIR, FONT_NAME2)
+
 
 
 # --- Define TARGET Areas (BOXES for auto-sizing) ---
@@ -131,7 +134,7 @@ def create_poster(day_of_week, month, day_num_str, pub_name, event_type_text, ti
         num_opt_size = find_max_font_size(day_num_text, FONT_PATH, NUMBER_BOX, draw)
         pub_opt_size = find_max_font_size(pub_text, FONT_PATH, PUB_BOX, draw)
         # <<< Calculate optimal sizes for optional fields >>>
-        event_type_opt_size = find_max_font_size(event_type_final_text, FONT_PATH, EVENT_TYPE_BOX, draw)
+        event_type_opt_size = find_max_font_size(event_type_final_text, FONT_PATH2, EVENT_TYPE_BOX, draw)
         time_opt_size = find_max_font_size(time_final_text, FONT_PATH, TIME_BOX, draw)
         first_place_opt_size = find_max_font_size(first_place_final_text, FONT_PATH, FIRST_PLACE_BOX, draw)
 
