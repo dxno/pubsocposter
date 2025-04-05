@@ -214,7 +214,7 @@ st.title("🍻 Pub Soc Poster Generator 🦆")
 
 # (UI Input Section remains the same - uses DEFAULT values)
 st.header("Required Info")
-date_str_input = st.text_input("Event Date", placeholder="e.g., 18 March or Tuesday 18 March", help="...")
+date_str_input = st.text_input("Event Date", placeholder="e.g., March 18 or Tuesday 18 March", help="...")
 pub_name_input = st.text_input("Pub Name (after first place)")
 st.markdown("---")
 st.header("Optional Details (Defaults from Template)")
@@ -229,36 +229,63 @@ if st.button("✨ Generate Poster ✨"):
     if not date_str_input or not pub_name_input:
         st.warning("✋ Please enter at least the Date and Pub Name.")
     else:
-        # (Date Parsing remains the same)
         day_of_week, month, day_num_str = None, None, None; event_date = None
-        print(f"Attempting to parse date: {date_str_input}")
+
+        # --- Clean the input string ---
+        cleaned_date_str = date_str_input.strip() # <--- ADD THIS LINE
+        print(f"Attempting to parse cleaned date: '{cleaned_date_str}'") # Log cleaned string
+
+        # --- Date Parsing (Use cleaned_date_str) ---
         try:
             parsed = False
-            for fmt in ("%B %d", "%A %d %B", "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%d %B %Y", "%A, %B %d", "%a %b %d", "%A %d", "%d %B"):
+            # List of formats to try
+            formats_to_try = [
+                "%B %d",       # January 14
+                "%d %B",       # 14 January
+                "%A %d %B",    # Tuesday 14 January
+                "%A, %B %d",   # Tuesday, January 14
+                # Add other formats if needed, keeping %B %d and %d %B prominent
+                "%Y-%m-%d",
+                "%d/%m/%Y",
+                "%m/%d/%Y",
+                "%d %B %Y",
+                "%a %b %d",
+                "%A %d"        # Tuesday 14 (Month might be inferred incorrectly if not careful)
+            ]
+
+            for fmt in formats_to_try:
                  try:
                      now = datetime.datetime.now()
-                     parsed_date = datetime.datetime.strptime(date_str_input, fmt)
+                     # Use the cleaned input string for parsing
+                     parsed_date = datetime.datetime.strptime(cleaned_date_str, fmt) # <--- USE cleaned_date_str
+                     # Handle year defaulting and wrap-around (same as before)
                      if parsed_date.year == 1900: event_date = parsed_date.replace(year=now.year).date()
                      else: event_date = parsed_date.date()
                      if event_date < now.date() - datetime.timedelta(days=180): event_date = event_date.replace(year=event_date.year + 1)
-                     parsed = True; break
-                 except ValueError: continue
+                     parsed = True; break # Stop on first successful parse
+                 except ValueError:
+                     continue # Try next format
+
             if parsed:
                 day_of_week = event_date.strftime("%A"); month = event_date.strftime("%B"); day_num_str = str(event_date.day)
                 st.info(f"🗓️ Using date: {day_of_week}, {month} {day_num_str} ({event_date.year})")
-            else: st.error("❌ Could not parse date. Use format like 'July 4' or 'Tuesday 18 March'.")
-        except Exception as e: st.error(f"🤯 Error during date parsing: {e}"); event_date = None
+            else:
+                # <<< IMPROVED ERROR MESSAGE >>>
+                st.error("❌ Could not parse date. Please use 'Month Day' (e.g., July 4) or 'Day Month' (e.g., 4 July). Including the weekday is also okay.")
 
-        # Get Optional Values
+        except Exception as e:
+            st.error(f"🤯 Error during date parsing: {e}"); event_date = None
+
+        # --- Get Optional Values ---
         event_type_val = event_type_input
         time_val = time_input
         first_place_val = first_place_input
 
-        # Call Image Generation
+        # --- Call Image Generation ---
         if day_of_week and month and day_num_str:
             with st.spinner("⏳ Generating image..."):
                 generated_image = create_poster(day_of_week, month, day_num_str, pub_name_input, event_type_val, time_val, first_place_val)
-            # Display Result
+            # --- Display Result ---
             if generated_image:
                 st.success("✅ Poster Generated!")
                 st.image(generated_image, caption="Generated Poster", use_container_width=True)
